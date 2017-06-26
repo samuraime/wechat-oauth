@@ -2,12 +2,10 @@
 /* eslint no-undef: 0 */
 
 const expect = require('expect.js');
-const urllib = require('urllib');
 const muk = require('muk');
 const OAuth = require('../');
+const http = require('../lib/http');
 const config = require('./config');
-
-const wrap = data => ({ data });
 
 describe('oauth.js', function () {
   describe('getAuthorizeURL', function () {
@@ -60,7 +58,7 @@ describe('oauth.js', function () {
 
     describe('should ok', function () {
       before(function () {
-        muk(urllib, 'request', function () {
+        muk(http, 'get', function () {
           const resp = {
             access_token: 'ACCESS_TOKEN',
             expires_in: 7200,
@@ -68,7 +66,7 @@ describe('oauth.js', function () {
             openid: 'OPENID',
             scope: 'SCOPE',
           };
-          return Promise.resolve(wrap(resp));
+          return Promise.resolve(resp);
         });
       });
 
@@ -92,7 +90,7 @@ describe('oauth.js', function () {
 
     describe('should not ok', function () {
       before(function () {
-        muk(urllib, 'request', () => {
+        muk(http, 'get', () => {
           const resp = {
             access_token: 'ACCESS_TOKEN',
             expires_in: 0.1,
@@ -102,7 +100,7 @@ describe('oauth.js', function () {
           };
           return new Promise((resolve) => {
             setTimeout(() => {
-              resolve(wrap(resp));
+              resolve(resp);
             }, 100);
           });
         });
@@ -137,7 +135,7 @@ describe('oauth.js', function () {
 
     describe('should ok', function () {
       before(function () {
-        muk(urllib, 'request', function () {
+        muk(http, 'get', function () {
           const resp = {
             access_token: 'ACCESS_TOKEN',
             expires_in: 7200,
@@ -145,7 +143,7 @@ describe('oauth.js', function () {
             openid: 'OPENID',
             scope: 'SCOPE',
           };
-          return Promise.resolve(wrap(resp));
+          return Promise.resolve(resp);
         });
       });
 
@@ -182,7 +180,7 @@ describe('oauth.js', function () {
     describe('mock get user ok', function () {
       const api = new OAuth('appid', 'secret');
       before(function () {
-        muk(urllib, 'request', function () {
+        muk(http, 'get', function () {
           const resp = {
             openid: 'OPENID',
             nickname: 'NICKNAME',
@@ -196,7 +194,7 @@ describe('oauth.js', function () {
               'PRIVILEGE2',
             ],
           };
-          return Promise.resolve(wrap(resp));
+          return Promise.resolve(resp);
         });
       });
 
@@ -436,7 +434,7 @@ describe('oauth.js', function () {
   describe('mock getUserByCode', function () {
     const api = new OAuth('appid', 'secret');
     before(function () {
-      muk(urllib, 'request', function () {
+      muk(http, 'get', function () {
         const resp = {
           access_token: 'ACCESS_TOKEN',
           expires_in: 7200,
@@ -444,7 +442,7 @@ describe('oauth.js', function () {
           openid: 'OPENID',
           scope: 'SCOPE',
         };
-        return Promise.resolve(wrap(resp));
+        return Promise.resolve(resp);
       });
 
       muk(api, 'getUserByToken', function () {
