@@ -7,7 +7,7 @@
 
 微信公众平台OAuth
 
-此repo用```async/await```重写了[node-webot/wechat-oauth](https://github.com/node-webot/wechat-oauth)
+此Repo用```async/await```重写了[node-webot/wechat-oauth](https://github.com/node-webot/wechat-oauth)
 
 ## Features
 
