@@ -1,9 +1,9 @@
 # Wechat OAuth
 
-[![NPM version](https://badge.fury.io/js/node-wechat-oauth.svg)](http://badge.fury.io/js/node-wechat-oauth)
+[![npm version](https://badge.fury.io/js/node-wechat-oauth.svg)](https://badge.fury.io/js/node-wechat-oauth)
 [![Build Status](https://travis-ci.org/samuraime/wechat-oauth.svg)](https://travis-ci.org/samuraime/wechat-oauth)
 [![Dependencies Status](https://david-dm.org/samuraime/wechat-oauth.svg)](https://david-dm.org/samuraime/wechat-oauth)
-[![Coverage Status](https://coveralls.io/repos/samuraime/wechat-oauth/badge.svg)](https://coveralls.io/r/samuraime/wechat-oauth)
+[![Coverage Status](https://coveralls.io/repos/github/samuraime/wechat-oauth/badge.svg?branch=master)](https://coveralls.io/github/samuraime/wechat-oauth?branch=master)
 
 微信公众平台OAuth
 
@@ -34,17 +34,14 @@ const client = new OAuth('your appid', 'your secret');
 ```
 
 以上即可满足单进程使用  
-当多进程时, token需要全局维护, 以下为保存token的接口
+当多进程时, token需要全局维护, 以下为保存token的接口  
+持久化时请注意, 每个openid都对应一个唯一的token!
 
 ```js
 const client = new OAuth('appid', 'secret', async (openid) => {
-  // 传入一个根据openid获取对应的全局token的方法
   const txt = await fs.readFile(`${openid}:access_token.txt`, 'utf8');
   return JSON.parse(txt);
 }, async (openid, token) => {
-  // 请将token存储到全局, 跨进程、跨机器级别的全局, 比如写到数据库、redis等
-  // 这样才能在cluster模式及多机情况下使用, 以下为写入到文件的示例
-  // 持久化时请注意, 每个openid都对应一个唯一的token!
   await fs.writeFile(`${openid}:access_token.txt`, JSON.stringify(token));
 });
 ```
