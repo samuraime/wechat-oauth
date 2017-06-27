@@ -17,7 +17,7 @@
 ## Installation
 
 ```sh
-npm install node-node-wechat-oauth --save
+npm install node-wechat-oauth --save
 ```
 
 ## Docs
@@ -30,7 +30,7 @@ npm install node-node-wechat-oauth --save
 
 ```js
 const OAuth = require('node-wechat-oauth');
-const client = new OAuth('your appid', 'your secret');
+const oauth = new OAuth('your appid', 'your secret');
 ```
 
 以上即可满足单进程使用  
@@ -38,7 +38,7 @@ const client = new OAuth('your appid', 'your secret');
 持久化时请注意, 每个openid都对应一个唯一的token!
 
 ```js
-const client = new OAuth('appid', 'secret', async (openid) => {
+const oauth = new OAuth('appid', 'secret', async (openid) => {
   const txt = await fs.readFile(`${openid}:access_token.txt`, 'utf8');
   return JSON.parse(txt);
 }, async (openid, token) => {
@@ -55,13 +55,13 @@ const client = new OAuth('appid', 'secret', async (openid) => {
 生成引导用户点击的URL
 
 ```js
-const url = client.getAuthorizeURL('redirectUrl', 'state', 'scope');
+const url = oauth.getAuthorizeURL('redirectUrl', 'state', 'scope');
 ```
 
 如果是PC上的网页, 请使用以下方式生成
 
 ```js
-const url = client.getAuthorizeURLForWebsite('redirectUrl');
+const url = oauth.getAuthorizeURLForWebsite('redirectUrl');
 ```
 
 ### 获取OpenID和AccessToken
@@ -69,7 +69,7 @@ const url = client.getAuthorizeURLForWebsite('redirectUrl');
 用户点击上步生成的URL后会被重定向到上步设置的 `redirectUrl`, 并且会带有`code`参数, 我们可以使用这个`code`换取`access_token`和用户的`openid`
 
 ```js
-const result = await client.getAccessToken('code');
+const result = await oauth.getAccessToken('code');
 const accessToken = result.data.access_token;
 const openid = result.data.openid;
 ```
@@ -79,7 +79,7 @@ const openid = result.data.openid;
 如果我们生成引导用户点击的URL中`scope`参数值为`snsapi_userinfo`, 接下来我们就可以使用`openid`换取用户详细信息 ( 必须在getAccessToken方法执行完成之后 ) 
 
 ```js
-const userinfo = await client.getUser(openid);
+const userinfo = await oauth.getUser(openid);
 ```
 
 ## License
