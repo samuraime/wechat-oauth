@@ -480,8 +480,7 @@ describe('oauth.js', function () {
     });
 
     it('should ok with getUserByCode', function (done) {
-      const options = { code: 'code', lang: 'en' };
-      api.getUserByCode(options)
+      api.getUserByCode('code', 'en')
         .then((data) => {
           expect(data).to.have.keys('openid', 'nickname', 'sex', 'province', 'city',
             'country', 'headimgurl', 'privilege');

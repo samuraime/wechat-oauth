@@ -5,7 +5,7 @@
 [![Dependencies Status](https://david-dm.org/samuraime/wechat-oauth.svg)](https://david-dm.org/samuraime/wechat-oauth)
 [![Coverage Status](https://coveralls.io/repos/github/samuraime/wechat-oauth/badge.svg?branch=master)](https://coveralls.io/github/samuraime/wechat-oauth?branch=master)
 
-微信公众平台OAuth
+[微信公众平台OAuth](https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140842)
 
 此Repo用```async/await```重写了[node-webot/wechat-oauth](https://github.com/node-webot/wechat-oauth)
 
