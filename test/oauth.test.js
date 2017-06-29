@@ -1,6 +1,3 @@
-/* eslint prefer-arrow-callback: 0 */
-/* eslint no-undef: 0 */
-
 const expect = require('expect.js');
 const muk = require('muk');
 const OAuth = require('../');

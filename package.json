@@ -16,8 +16,7 @@
     "oauth"
   ],
   "dependencies": {
-    "node-fetch": "^1.7.1",
-    "urllib": "2.7.0"
+    "node-fetch": "^1.7.1"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
