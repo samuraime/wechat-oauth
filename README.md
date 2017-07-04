@@ -7,8 +7,6 @@
 
 [微信公众平台OAuth](https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140842)
 
-此Repo用```async/await```重写了[node-webot/wechat-oauth](https://github.com/node-webot/wechat-oauth)
-
 ## Features
 
 - OAuth授权
@@ -82,6 +80,11 @@ const openid = result.data.openid;
 const userinfo = await oauth.getUser(openid);
 ```
 
+## Credits
+
+This repo was forked from the MIT licensed [node-webot/wechat-oauth](https://github.com/node-webot/wechat-oauth)  
+并用```async/await```重写
+
 ## License
 
-MIT
+[MIT](LICENSE)
